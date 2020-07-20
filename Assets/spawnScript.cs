@@ -5,6 +5,7 @@ using UnityEngine;
 public class spawnScript : MonoBehaviour
 {
     public GameObject cube;
+    
     int timer = 0;
 
     //I have added some comment
@@ -12,6 +13,9 @@ public class spawnScript : MonoBehaviour
     {
         if (timer >= 100)
         {
+            GameObject plane = GameObject.CreatePrimitive(PrimitiveType.Sphere);
+            plane.AddComponent<Rigidbody>();
+            
             Instantiate(cube, transform);
             timer = 0;
         }
