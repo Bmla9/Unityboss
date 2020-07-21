@@ -6,12 +6,16 @@ public class CameraScript : MonoBehaviour
 {
     float xpos, ypos;
     Vector3 pos2;
+    Vector3 defaultPos;
 
     private void Start()
     {
         // Gets the starting (x, y) coordinates.
         xpos = transform.position.x;
         ypos = transform.position.y;
+
+        // Gets the default pos.
+        defaultPos = transform.position;
     }
 
     private void Update()
@@ -26,5 +30,6 @@ public class CameraScript : MonoBehaviour
             pos2 = new Vector3(xpos + mouseX, ypos + mouseY, -10f);
             transform.position = Vector3.Lerp(transform.position, pos2, 0.05f * Time.deltaTime);
         }
+        else transform.position = Vector3.Lerp(transform.position, defaultPos, 10f * Time.deltaTime);
     }
 }
