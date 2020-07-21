@@ -15,15 +15,20 @@ public class launchSphereScript : MonoBehaviour
         transform.localScale = new Vector3(range, range, range);
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void Update()
+    {
+        // Scrolling changes the effective range.
+        if (Input.mouseScrollDelta.y != 0)
+        {
+            range += Input.mouseScrollDelta.y;
+            transform.localScale = new Vector3(range, range, range);
+        }
+    }
+
+    private void OnTriggerStay(Collider other)
     {
         rb = other.GetComponent<Rigidbody>();
         direc = (other.transform.position - transform.position).normalized; // Gets the direction between the launch sphere and the cube / sphere.
         rb.AddForce(direc * force);
-    }
-
-    private void OnDrawGizmos()
-    {
-        Gizmos.DrawWireSphere(transform.position, range); // Draws the effective range as a gizmo.
     }
 }
